@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facility Management</title>
+    <style>
+        body { margin:0; background:linear-gradient(135deg,#667eea,#764ba2); font-family:Arial; }
+        .container { width:95%; margin:auto; padding-top: 20px; }
+        .box { background:white; padding:20px; border-radius:15px; margin-bottom:20px; }
+        input { padding:8px; margin:3px; width:130px; border-radius:5px; border:1px solid gray; }
+        button { padding:10px 15px; border:none; border-radius:8px; background:#4b6cb7; color:white; cursor:pointer; }
+        .delete { background:red; } .update { background:orange; }
+        table { width:100%; background:white; border-collapse:collapse; }
+        th,td { padding:10px; border:1px solid #ddd; text-align:center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🏭 Facility Management</h1>
+
+    <div class="box">
+        <h3>Add / Update Facility</h3>
+        <input id="fId" placeholder="ID (For Update)">
+        <input id="fName" placeholder="Name">
+        <input id="fLoc" placeholder="Location">
+        <input id="fMax" placeholder="Max Capacity" type="number">
+        <input id="fCurr" placeholder="Current Occupancy" type="number">
+        <br><br>
+        <button onclick="postFacility()">POST - Save</button>
+        <button class="update" onclick="putFacility()">PUT - Update</button>
+        <button onclick="clearForm()">Clear Form</button>
+    </div>
+
+    <div class="box">
+        <button onclick="getAllFacilities()">GET ALL</button>
+        <input id="searchId" placeholder="User ID">
+        <button onclick="getById()">GET BY ID</button>
+        <input id="deleteId" placeholder="User ID">
+        <button class="delete" onclick="deleteFacility()">DELETE</button>
+    </div>
+
+    <div class="box">
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Name</th><th>Location</th><th>Max Capacity</th><th>Current Occupancy</th></tr>
+            </thead>
+            <tbody id="facilityTableData"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+const API = "https://fullstackbackend-1-saju.onrender.com/facilities";
+
+function getHeaders() {
+    return { "Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("jwt_token") };
+}
+
+function rowTemplate(f) {
+    return `<tr><td>${f.id}</td><td>${f.name}</td><td>${f.location}</td><td>${f.maxCapacityKg}</td><td>${f.currentOccupancyKg}</td></tr>`;
+}
+
+// POST
+async function postFacility() {
+    const res = await fetch(API, { method: "POST", headers: getHeaders(), body: JSON.stringify(getFormData()) });
+    if (res.ok) { alert("Saved!"); clearForm(); }
+}
+
+
+async function getAllFacilities() {
+    const res = await fetch(API, { headers: getHeaders() });
+    const data = await res.json();
+    document.getElementById("facilityTableData").innerHTML = data.map(rowTemplate).join("");
+}
+
+async function getById() {
+    const id = document.getElementById("searchId").value;
+    if (!id) return alert("Enter ID");
+    
+    const res = await fetch(`${API}/${id}`, { headers: getHeaders() });
+    if (res.ok) {
+        const f = await res.json();
+        
+        document.getElementById("facilityTableData").innerHTML = rowTemplate(f);
+    } else { alert("Not Found"); }
+}
+
+
+async function putFacility() {
+    const id = document.getElementById("fId").value;
+    if(!id) return alert("Please enter the ID to update!");
+
+    const data = getFormData();
+    
+    try {
+        const res = await fetch(`${API}/${id}`, { 
+            method: "PUT", 
+            headers: getHeaders(), 
+            body: JSON.stringify(data) 
+        });
+
+        if (res.ok) {
+            alert("Updated Successfully!");
+            getAllFacilities(); 
+        } else {
+            const errorText = await res.text();
+            alert("Update Failed: " + errorText);
+        }
+    } catch(e) {
+        alert("Network Error!");
+    }
+}
+
+function getFormData() {
+    return {
+        name: document.getElementById("fName").value,
+        location: document.getElementById("fLoc").value,
+        maxCapacityKg: parseFloat(document.getElementById("fMax").value) || 0,
+        currentOccupancyKg: parseFloat(document.getElementById("fCurr").value) || 0
+    };
+}
+
+async function deleteFacility() {
+    const id = document.getElementById("deleteId").value;
+    await fetch(`${API}/${id}`, { method: "DELETE", headers: getHeaders() });
+    alert("Deleted!"); getAllFacilities();
+}
+
+function getFormData() {
+    return {
+        name: document.getElementById("fName").value,
+        location: document.getElementById("fLoc").value,
+        maxCapacityKg: parseFloat(document.getElementById("fMax").value) || 0,
+        currentOccupancyKg: parseFloat(document.getElementById("fCurr").value) || 0
+    };
+}
+
+function clearForm() { document.querySelectorAll("input").forEach(i => i.value = ""); }
+</script>
+</body>
+</html>

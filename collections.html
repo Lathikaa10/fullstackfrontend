@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Collection Request</title>
+    <style>
+        body { margin:0; background:linear-gradient(135deg,#11998e,#38ef7d); font-family:Arial; padding:20px; }
+        .container { width:90%; margin:auto; }
+        .box { background:white; padding:20px; border-radius:15px; margin-bottom:20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        input, select { padding:10px; margin:5px; width:160px; border-radius:5px; border:1px solid #ccc; }
+        button { padding:10px 20px; border:none; border-radius:8px; background:#11998e; color:white; cursor:pointer; font-weight:bold; }
+        .delete { background:red; } .update { background:orange; }
+        table { width:100%; background:white; border-collapse:collapse; margin-top:10px; }
+        th,td { padding:12px; border:1px solid #ddd; text-align:center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚛 Collection Request Management</h1>
+
+    <div class="box">
+        <h3>Add / Update Request</h3>
+        <input id="reqId" placeholder="ID (For Update)">
+        <input id="pickupAddress" placeholder="Pickup Address">
+        <input id="scheduledDate" type="date">
+        <select id="status">
+            <option value="PENDING">PENDING</option>
+            <option value="COMPLETED">COMPLETED</option>
+            <option value="CANCELLED">CANCELLED</option>
+        </select>
+        <input id="totalWeightEstimate" placeholder="Weight Estimate (Kg)" type="number">
+        <input id="rewardPointsEarned" placeholder="Reward Points" type="number">
+        <br><br>
+        <button onclick="postReq()">POST - Save</button>
+        <button class="update" onclick="putReq()">PUT - Update</button>
+        <button onclick="clearForm()">Clear Form</button>
+    </div>
+
+    <div class="box">
+        <button onclick="getAllReqs()">GET ALL</button>
+        <input id="searchId" placeholder="Request ID">
+        <button onclick="getById()">GET BY ID</button>
+        <input id="deleteId" placeholder="Request ID">
+        <button class="delete" onclick="deleteReq()">DELETE</button>
+    </div>
+
+    <div class="box">
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Address</th><th>Date</th><th>Status</th><th>Weight</th><th>Points</th></tr>
+            </thead>
+            <tbody id="tableData"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const API = "https://fullstackbackend-1-saju.onrender.com/collections";
+
+    function getHeaders() {
+        return { 
+            "Content-Type": "application/json", 
+            "Authorization": "Bearer " + localStorage.getItem("jwt_token") 
+        };
+    }
+
+    function getFormData() {
+        return {
+            pickupAddress: document.getElementById("pickupAddress").value,
+            scheduledDate: document.getElementById("scheduledDate").value,
+            status: document.getElementById("status").value,
+            totalWeightEstimate: parseFloat(document.getElementById("totalWeightEstimate").value) || 0,
+            rewardPointsEarned: parseFloat(document.getElementById("rewardPointsEarned").value) || 0
+        };
+    }
+
+    async function postReq() {
+        try {
+            const res = await fetch(API, { method: "POST", headers: getHeaders(), body: JSON.stringify(getFormData()) });
+            if (res.ok) { alert("Successfully Saved!"); clearForm(); } 
+            else { alert("Error: " + res.status); }
+        } catch (e) { alert("Connection Error!"); }
+    }
+
+    async function getAllReqs() {
+        try {
+            const res = await fetch(API, { headers: getHeaders() });
+            if (!res.ok) throw new Error();
+            const data = await res.json();
+            document.getElementById("tableData").innerHTML = data.map(r => 
+                `<tr><td>${r.id}</td><td>${r.pickupAddress}</td><td>${r.scheduledDate}</td><td>${r.status}</td><td>${r.totalWeightEstimate}</td><td>${r.rewardPointsEarned}</td></tr>`
+            ).join("");
+        } catch (e) { alert("Failed to fetch data!"); }
+    }
+
+    async function getById() {
+        const id = document.getElementById("searchId").value;
+        if(!id) return;
+        try {
+            const res = await fetch(`${API}/${id}`, { headers: getHeaders() });
+            if (res.ok) {
+                const r = await res.json();
+                document.getElementById("tableData").innerHTML = `<tr><td>${r.id}</td><td>${r.pickupAddress}</td><td>${r.scheduledDate}</td><td>${r.status}</td><td>${r.totalWeightEstimate}</td><td>${r.rewardPointsEarned}</td></tr>`;
+            } else { alert("Not Found!"); }
+        } catch (e) { alert("Error!"); }
+    }
+
+    async function putReq() {
+        const id = document.getElementById("reqId").value;
+        if(!id) return alert("Enter ID");
+        try {
+            const res = await fetch(`${API}/${id}`, { method: "PUT", headers: getHeaders(), body: JSON.stringify(getFormData()) });
+            if (res.ok) { alert("Successfully Updated!"); }
+            else { alert("Update Failed!"); }
+        } catch (e) { alert("Error!"); }
+    }
+
+    async function deleteReq() {
+        const id = document.getElementById("deleteId").value;
+        if(!id) return alert("Enter ID");
+        try {
+            const res = await fetch(`${API}/${id}`, { method: "DELETE", headers: getHeaders() });
+            if (res.ok) { alert("Successfully Deleted!"); getAllReqs(); }
+            else { alert("Delete Failed!"); }
+        } catch (e) { alert("Error!"); }
+    }
+
+    function clearForm() { document.querySelectorAll("input, select").forEach(i => i.value = ""); }
+</script>
+</body>
+</html>

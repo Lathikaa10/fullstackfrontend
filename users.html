@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management System</title>
+    <style>
+        body { margin:0; background:linear-gradient(135deg,#11998e,#38ef7d); font-family:Arial; }
+        .container { width:95%; margin:auto; padding-top: 20px; }
+        h1 { text-align:center; color:white; }
+        .box { background:white; padding:20px; border-radius:15px; margin-bottom:20px; }
+        input, select { padding:8px; margin:3px; width:130px; border-radius:5px; border:1px solid gray; }
+        button { padding:10px 15px; border:none; border-radius:8px; background:#11998e; color:white; cursor:pointer; }
+        .delete { background:red; } .update { background:orange; }
+        table { width:100%; background:white; border-collapse:collapse; margin-top:10px; }
+        th,td { padding:8px; border:1px solid #ddd; text-align:center; font-size:12px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👤 User Management</h1>
+
+    <div class="box">
+        <h3>Add / Update User</h3>
+        <input id="userId" placeholder="ID (For Update)">
+        <input id="username" placeholder="Username">
+        <input id="email" placeholder="Email">
+        <input id="password" placeholder="Password" type="password">
+        <select id="role">
+            <option value="USER">USER</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="TRAINER">TRAINER</option>
+        </select>
+        <input id="rewardPoints" placeholder="Points" type="number">
+        <input id="organicWaste" placeholder="Organic" type="number">
+        <input id="recyclableWaste" placeholder="Recyclable" type="number">
+        <input id="nonRecyclableWaste" placeholder="Non-Recy" type="number">
+        <input id="hazardousWaste" placeholder="Hazardous" type="number">
+        <input id="collectedWasteBalance" placeholder="Balance" type="number">
+        <input id="totalContributedKg" placeholder="Total" type="number">
+        <input id="pendingWasteKg" placeholder="Pending" type="number">
+        <br><br>
+        <button onclick="postUser()">POST - Save</button>
+        <button class="update" onclick="putUser()">PUT - Update</button>
+        <button onclick="clearForm()">Clear Form</button>
+    </div>
+
+    <div class="box">
+        <button onclick="getAllUsers()">GET ALL USERS</button>
+        <input id="searchId" placeholder="User ID">
+        <button onclick="getById()">GET BY ID</button>
+        <input id="deleteId" placeholder="User ID">
+        <button class="delete" onclick="deleteUser()">DELETE USER</button>
+    </div>
+
+    <div class="box">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th><th>User</th><th>Email</th><th>Role</th><th>Pts</th>
+                    <th>Org</th><th>Recy</th><th>Non-R</th><th>Haz</th><th>Bal</th><th>Tot</th><th>Pend</th>
+                </tr>
+            </thead>
+            <tbody id="tableData"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+const API = "https://fullstackbackend-1-saju.onrender.com/users";
+
+function getHeaders() {
+    return { "Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("jwt_token") };
+}
+
+function rowTemplate(u) {
+    return `<tr>
+        <td>${u.id}</td><td>${u.username}</td><td>${u.email}</td><td>${u.role}</td>
+        <td>${u.rewardPoints}</td><td>${u.organicWaste}</td><td>${u.recyclableWaste}</td>
+        <td>${u.nonRecyclableWaste}</td><td>${u.hazardousWaste}</td><td>${u.collectedWasteBalance}</td>
+        <td>${u.totalContributedKg}</td><td>${u.pendingWasteKg}</td>
+    </tr>`;
+}
+
+
+async function postUser() {
+    const res = await fetch(API, { method: "POST", headers: getHeaders(), body: JSON.stringify(getFormData()) });
+    if (res.ok) { alert("User Saved!"); clearForm(); } else { alert("Failed!"); }
+}
+
+
+async function getAllUsers() {
+    const res = await fetch(API, { headers: getHeaders() });
+    const data = await res.json();
+    document.getElementById("tableData").innerHTML = data.map(rowTemplate).join("");
+}
+
+async function getById() {
+    const id = document.getElementById("searchId").value;
+    if(!id) return alert("Enter ID");
+    const res = await fetch(`${API}/${id}`, { headers: getHeaders() });
+    if (res.ok) {
+        const u = await res.json();
+        document.getElementById("tableData").innerHTML = rowTemplate(u);
+    } else { alert("Not Found"); }
+}
+
+
+async function putUser() {
+    const id = document.getElementById("userId").value;
+    if(!id) return alert("Enter ID to Update");
+    const res = await fetch(`${API}/${id}`, { method: "PUT", headers: getHeaders(), body: JSON.stringify(getFormData()) });
+    if (res.ok) { alert("Updated Successfully!"); } else { alert("Update Failed!"); }
+}
+
+async function deleteUser() {
+    const id = document.getElementById("deleteId").value;
+    if(!id) return alert("Enter ID");
+    const res = await fetch(`${API}/${id}`, { method: "DELETE", headers: getHeaders() });
+    if (res.ok) { alert("Deleted!"); getAllUsers(); }
+}
+
+function getFormData() {
+    return {
+        username: document.getElementById("username").value,
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value,
+        role: document.getElementById("role").value,
+        rewardPoints: parseFloat(document.getElementById("rewardPoints").value) || 0,
+        organicWaste: parseFloat(document.getElementById("organicWaste").value) || 0,
+        recyclableWaste: parseFloat(document.getElementById("recyclableWaste").value) || 0,
+        nonRecyclableWaste: parseFloat(document.getElementById("nonRecyclableWaste").value) || 0,
+        hazardousWaste: parseFloat(document.getElementById("hazardousWaste").value) || 0,
+        collectedWasteBalance: parseFloat(document.getElementById("collectedWasteBalance").value) || 0,
+        totalContributedKg: parseFloat(document.getElementById("totalContributedKg").value) || 0,
+        pendingWasteKg: parseFloat(document.getElementById("pendingWasteKg").value) || 0
+    };
+}
+
+function clearForm() { document.querySelectorAll("input, select").forEach(i => i.value = ""); }
+</script>
+</body>
+</html>

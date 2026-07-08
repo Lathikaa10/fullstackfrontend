@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RecycleX Register</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+       
+        .navbar { background: #11998e; padding: 15px; color: white; display: flex; gap: 20px; align-items: center; }
+        .navbar a { color: white; text-decoration: none; font-weight: bold; }
+        
+        .reg-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 0; }
+        .reg-card { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 350px; }
+        
+        .form-group { text-align: left; margin-bottom: 12px; }
+        label { display: block; font-weight: bold; margin-bottom: 3px; color: #555; font-size: 13px; }
+        input, select { width: 92%; padding: 10px; border: 1px solid #ddd; border-radius: 8px; }
+        button { width: 100%; padding: 12px; background: #11998e; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="index.html">🏠 Home</a>
+        <a href="login.html">🔑 Login</a>
+        <a href="register.html">📝 Register</a>
+    </div>
+
+    <div class="reg-container">
+        <div class="reg-card">
+            <h2 style="text-align:center;">Register</h2>
+            <form id="register-form">
+                <div class="form-group"><label>Username</label><input type="text" id="username" required></div>
+                <div class="form-group"><label>Email</label><input type="email" id="email" required></div>
+                <div class="form-group"><label>Password</label><input type="password" id="password" required></div>
+                <div class="form-group"><label>Role</label>
+                    <select id="role">
+                        <option value="USER">USER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Reward Points</label><input type="number" id="rewardPoints" value="0"></div>
+                <div class="form-group"><label>Organic</label><input type="number" id="organicWaste" value="0"></div>
+                <div class="form-group"><label>Recyclable</label><input type="number" id="recyclableWaste" value="0"></div>
+                <div class="form-group"><label>Non-Recyclable</label><input type="number" id="nonRecyclableWaste" value="0"></div>
+                <div class="form-group"><label>Hazardous</label><input type="number" id="hazardousWaste" value="0"></div>
+                <div class="form-group"><label>Balance</label><input type="number" id="collectedWasteBalance" value="0"></div>
+                <div class="form-group"><label>Total Kg</label><input type="number" id="totalContributedKg" value="0"></div>
+                <div class="form-group"><label>Pending Kg</label><input type="number" id="pendingWasteKg" value="0"></div>
+
+                <button type="submit" id="registerBtn">REGISTER</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("register-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const user = {
+                username: document.getElementById("username").value,
+                email: document.getElementById("email").value,
+                password: document.getElementById("password").value,
+                role: document.getElementById("role").value,
+                rewardPoints: parseFloat(document.getElementById("rewardPoints").value),
+                organicWaste: parseFloat(document.getElementById("organicWaste").value),
+                recyclableWaste: parseFloat(document.getElementById("recyclableWaste").value),
+                nonRecyclableWaste: parseFloat(document.getElementById("nonRecyclableWaste").value),
+                hazardousWaste: parseFloat(document.getElementById("hazardousWaste").value),
+                collectedWasteBalance: parseFloat(document.getElementById("collectedWasteBalance").value),
+                totalContributedKg: parseFloat(document.getElementById("totalContributedKg").value),
+                pendingWasteKg: parseFloat(document.getElementById("pendingWasteKg").value)
+            };
+
+            const res = await fetch("https://fullstackbackend-1-saju.onrender.com/auth/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(user)
+            });
+
+            if (res.ok) {
+                alert("Registered Successfully!");
+                window.location.href = "login.html";
+            } else {
+                alert("Error: " + await res.text());
+            }
+        });
+    </script>
+</body>
+</html>

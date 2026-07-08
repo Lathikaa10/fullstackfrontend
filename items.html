@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recyclable Item Management</title>
+    <style>
+        
+        body { margin:0; background:linear-gradient(135deg,#11998e,#38ef7d); font-family:Arial; }
+        .container { width:95%; margin:auto; padding-top: 20px; }
+        h1 { text-align:center; color:white; }
+        .box { background:white; padding:20px; border-radius:15px; margin-bottom:20px; }
+        input { padding:8px; margin:3px; width:180px; border-radius:5px; border:1px solid gray; }
+        button { padding:10px 15px; border:none; border-radius:8px; background:#11998e; color:white; cursor:pointer; }
+        .delete { background:red; } .update { background:orange; }
+        table { width:100%; background:white; border-collapse:collapse; margin-top:10px; }
+        th,td { padding:10px; border:1px solid #ddd; text-align:center; font-size:13px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>♻️ Recyclable Item Management</h1>
+
+    <div class="box">
+        <h3>Add / Update Item</h3>
+        <input id="itemId" placeholder="ID (For Update)">
+        <input id="materialType" placeholder="Material Type">
+        <input id="actualWeight" placeholder="Actual Weight (Kg)" type="number">
+        <input id="qualityGrade" placeholder="Quality Grade (e.g., A, B)">
+        <br><br>
+        <button onclick="postItem()">POST - Save</button>
+        <button class="update" onclick="putItem()">PUT - Update</button>
+        <button onclick="clearForm()">Clear Form</button>
+    </div>
+
+    <div class="box">
+        <button onclick="getAllItems()">GET ALL</button>
+        <input id="searchId" placeholder="Item ID">
+        <button onclick="getById()">GET BY ID</button>
+        <input id="deleteId" placeholder="Item ID">
+        <button class="delete" onclick="deleteItem()">DELETE</button>
+    </div>
+
+    <div class="box">
+        <table>
+            <thead>
+                <tr><th>ID</th><th>Material Type</th><th>Actual Weight</th><th>Quality Grade</th></tr>
+            </thead>
+            <tbody id="tableData"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const API = "https://fullstackbackend-1-saju.onrender.com/items";
+
+    function getHeaders() {
+        return { 
+            "Content-Type": "application/json", 
+            "Authorization": "Bearer " + localStorage.getItem("jwt_token") 
+        };
+    }
+
+    function getFormData() {
+        return {
+            materialType: document.getElementById("materialType").value,
+            actualWeight: parseFloat(document.getElementById("actualWeight").value) || 0,
+            qualityGrade: document.getElementById("qualityGrade").value
+        };
+    }
+
+    async function postItem() {
+        const res = await fetch(API, { 
+            method: "POST", headers: getHeaders(), 
+            body: JSON.stringify(getFormData()) 
+        });
+        if (res.ok) { alert("Saved Successfully!"); clearForm(); }
+    }
+
+    async function getAllItems() {
+        const res = await fetch(API, { headers: getHeaders() });
+        const data = await res.json();
+        document.getElementById("tableData").innerHTML = data.map(i => 
+            `<tr><td>${i.id}</td><td>${i.materialType}</td><td>${i.actualWeight}</td><td>${i.qualityGrade}</td></tr>`
+        ).join("");
+    }
+
+    async function getById() {
+        const id = document.getElementById("searchId").value;
+        const res = await fetch(`${API}/${id}`, { headers: getHeaders() });
+        if (res.ok) {
+            const i = await res.json();
+            document.getElementById("tableData").innerHTML = `<tr><td>${i.id}</td><td>${i.materialType}</td><td>${i.actualWeight}</td><td>${i.qualityGrade}</td></tr>`;
+        }
+    }
+
+    async function putItem() {
+        const id = document.getElementById("itemId").value;
+        await fetch(`${API}/${id}`, { 
+            method: "PUT", headers: getHeaders(), 
+            body: JSON.stringify(getFormData()) 
+        });
+        alert("Updated Successfully!");
+    }
+
+    async function deleteItem() {
+        const id = document.getElementById("deleteId").value;
+        await fetch(`${API}/${id}`, { method: "DELETE", headers: getHeaders() });
+        alert("Deleted!"); getAllItems();
+    }
+
+    function clearForm() { document.querySelectorAll("input").forEach(i => i.value = ""); }
+</script>
+</body>
+</html>

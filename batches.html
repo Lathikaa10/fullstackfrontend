@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Batch Management</title>
+    <style>
+        body { margin:0; background:linear-gradient(135deg,#6a11cb,#2575fc); font-family:Arial; color:white; }
+        .container { width:95%; margin:auto; padding-top: 20px; }
+        .box { background:white; padding:20px; border-radius:15px; margin-bottom:20px; color:black; }
+        input, select { padding:8px; margin:3px; width:150px; border-radius:5px; border:1px solid gray; }
+        button { padding:10px 15px; border:none; border-radius:8px; background:#6a11cb; color:white; cursor:pointer; }
+        .delete { background:red; } .update { background:orange; }
+        table { width:100%; background:white; border-collapse:collapse; color:black; }
+        th,td { padding:10px; border:1px solid #ddd; text-align:center; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📦 Batch Management</h1>
+    <div class="box">
+        <h3>Add / Update Batch</h3>
+        <input id="batchId" placeholder="ID (For Update)">
+        <select id="status">
+            <option value="SCHEDULED">SCHEDULED</option>
+            <option value="ONGOING">ONGOING</option>
+            <option value="COMPLETED">COMPLETED</option>
+        </select>
+        <input id="totalBatchWeight" placeholder="Total Weight (Kg)" type="number">
+        <br><br>
+        <button onclick="postBatch()">POST - Save</button>
+        <button class="update" onclick="putBatch()">PUT - Update</button>
+        <button onclick="clearForm()">Clear Form</button>
+    </div>
+
+    <div class="box">
+        <button onclick="getAllBatches()">GET ALL</button>
+        <input id="searchId" placeholder="Batch ID">
+        <button onclick="getById()">GET BY ID</button>
+        <input id="deleteId" placeholder="Batch ID">
+        <button class="delete" onclick="deleteBatch()">DELETE</button>
+    </div>
+
+    <div class="box">
+        <table>
+            <thead><tr><th>ID</th><th>Status</th><th>Total Weight (Kg)</th></tr></thead>
+            <tbody id="tableData"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    const API = "http://localhost:8081/batches"; // Backend-la @RequestMapping("/batches") irukkanum
+
+    function getHeaders() {
+        return { 
+            "Content-Type": "application/json", 
+            "Authorization": "Bearer " + localStorage.getItem("jwt_token") 
+        };
+    }
+
+    // Inga entity fields exact-a irukkanum
+    function getFormData() {
+        return {
+            status: document.getElementById("status").value,
+            totalBatchWeight: parseFloat(document.getElementById("totalBatchWeight").value) || 0
+        };
+    }
+
+async function postBatch() {
+    try {
+        const res = await fetch(API, { 
+            method: "POST", 
+            headers: getHeaders(), 
+            body: JSON.stringify(getFormData()) 
+        });
+        
+        // Error iruntha text-a extract panna try pannuvom
+        if (!res.ok) {
+            const errorMsg = await res.text();
+            alert("Error " + res.status + ": " + errorMsg);
+            return;
+        }
+        
+        alert("Saved Successfully!"); 
+        clearForm();
+        
+    } catch (error) {
+        alert("Fetch Error: " + error.message);
+    }
+}
+    async function getAllBatches() {
+        const res = await fetch(API, { headers: getHeaders() });
+        const data = await res.json();
+        document.getElementById("tableData").innerHTML = data.map(b => 
+            `<tr><td>${b.id}</td><td>${b.status}</td><td>${b.totalBatchWeight}</td></tr>`
+        ).join("");
+    }
+
+    async function getById() {
+        const id = document.getElementById("searchId").value;
+        const res = await fetch(`${API}/${id}`, { headers: getHeaders() });
+        if (res.ok) {
+            const b = await res.json();
+            document.getElementById("tableData").innerHTML = `<tr><td>${b.id}</td><td>${b.status}</td><td>${b.totalBatchWeight}</td></tr>`;
+        } else { alert("Not Found"); }
+    }
+
+    async function putBatch() {
+        const id = document.getElementById("batchId").value;
+        const res = await fetch(`${API}/${id}`, { 
+            method: "PUT", 
+            headers: getHeaders(), 
+            body: JSON.stringify(getFormData()) 
+        });
+        if (res.ok) { alert("Updated Successfully!"); } 
+        else { alert("Update Failed"); }
+    }
+
+    async function deleteBatch() {
+        const id = document.getElementById("deleteId").value;
+        const res = await fetch(`${API}/${id}`, { method: "DELETE", headers: getHeaders() });
+        if (res.ok) { alert("Deleted!"); getAllBatches(); }
+    }
+
+    function clearForm() { document.querySelectorAll("input, select").forEach(i => i.value = ""); }
+</script>
+</body>
+</html>
