@@ -43,9 +43,6 @@
     <div class="card" id="items-card" onclick="openPage('items-home.html')">🔄 Recyclable Items</div>
 </div>
 
-<div id="displayArea">
-    <iframe id="contentFrame" src=""></iframe>
-</div>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
@@ -73,13 +70,8 @@
     });
 
     function openPage(page) {
-        const displayArea = document.getElementById("displayArea");
-        const contentFrame = document.getElementById("contentFrame");
-        displayArea.style.display = "block";
-        contentFrame.src = page;
-        displayArea.scrollIntoView({ behavior: 'smooth' });
+        window.location.href=page;
     }
-
     function confirmLogout() {
         if (confirm("Are you sure you want to logout?")) {
             localStorage.clear();
