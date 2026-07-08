@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>RecycleX | Smart Batches</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+overflow-x:hidden;
+background:#fff;
+}
+
+
+nav{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:22px 70px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(0,0,0,.35);
+
+backdrop-filter:blur(15px);
+
+z-index:999;
+
+}
+
+.logo{
+
+font-size:34px;
+font-weight:700;
+color:white;
+
+}
+
+.logo span{
+
+color:#00b4ff;
+
+}
+
+nav ul{
+
+display:flex;
+gap:35px;
+list-style:none;
+
+}
+
+nav ul li a{
+
+color:white;
+text-decoration:none;
+font-size:17px;
+
+transition:.4s;
+
+}
+
+nav ul li a:hover{
+
+color:#00b4ff;
+
+}
+
+
+
+.hero{
+
+height:100vh;
+
+background:
+
+linear-gradient(rgba(0,0,0,.55),
+rgba(0,0,0,.55)),
+
+url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+
+padding:40px;
+
+}
+
+.hero-content{
+
+max-width:900px;
+color:white;
+
+}
+
+.hero-content h1{
+
+font-size:72px;
+font-weight:800;
+line-height:90px;
+margin-bottom:25px;
+
+}
+
+.hero-content span{
+
+color:#00b4ff;
+
+}
+
+.hero-content p{
+
+font-size:22px;
+line-height:38px;
+margin-bottom:35px;
+
+}
+
+.quote{
+
+font-size:28px;
+font-style:italic;
+color:#ffd54f;
+margin-bottom:40px;
+
+}
+
+.hero button{
+
+padding:18px 42px;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+margin:10px;
+transition:.4s;
+
+}
+
+.hero button:hover{
+
+transform:translateY(-8px);
+
+}
+
+.explore{
+
+background:#00b4ff;
+color:white;
+
+}
+
+.dashboard{
+
+background:white;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+♻ <span>RecycleX</span>
+
+</div>
+
+<ul>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#training">Training</a></li>
+
+<li><a href="#stats">Statistics</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Building <span>Smarter Teams</span>
+
+For A Greener Future
+
+</h1>
+
+<p>
+
+Train, organize and manage operational batches
+to improve productivity and create highly
+efficient recycling teams.
+
+</p>
+
+<div class="quote">
+
+"Strong Teams Build Sustainable Communities."
+
+</div>
+
+<button class="explore">
+
+Explore Batches
+
+</button>
+
+<button class="dashboard"
+
+onclick="window.location.href='dashboard.html'">
+
+Back To Dashboard
+
+</button>
+
+</div>
+
+</section>
+
+
+<section id="about"
+style="padding:120px 8%;background:#f5fbff;">
+
+<div style="display:flex;
+flex-wrap:wrap;
+justify-content:space-between;
+align-items:center;
+gap:60px;">
+
+<div style="flex:1;min-width:350px;">
+
+<img
+src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80"
+
+style="
+width:100%;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.2);">
+
+</div>
+
+<div style="flex:1;min-width:350px;">
+
+<h5 style="color:#00b4ff;letter-spacing:2px;">
+
+SMART TRAINING
+
+</h5>
+
+<h2 style="
+font-size:55px;
+margin:20px 0;
+color:#0f172a;">
+
+Develop Skilled Teams
+For Better Recycling
+
+</h2>
+
+<p style="
+font-size:20px;
+line-height:38px;
+color:#666;">
+
+RecycleX Batch Management enables
+organizations to create, monitor,
+and train operational teams with
+modern recycling practices.
+
+Empower every trainee with
+knowledge, discipline and
+environmental responsibility.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+<section id="training"
+
+style="
+padding:120px 8%;
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+">
+
+<h2 style="
+text-align:center;
+font-size:50px;
+color:white;
+margin-bottom:80px;">
+
+Training Programs
+
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:35px;">
+
+<div style="
+background:rgba(255,255,255,.10);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:60px;">
+
+👨‍🏫
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Professional Trainers
+
+</h3>
+
+<p style="line-height:30px;">
+
+Learn recycling operations
+from experienced trainers
+and industry experts.
+
+</p>
+
+</div>
+
+<div style="
+background:rgba(255,255,255,.10);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:60px;">
+
+👥
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Batch Management
+
+</h3>
+
+<p style="line-height:30px;">
+
+Organize trainees into
+efficient learning batches
+with structured schedules.
+
+</p>
+
+</div>
+
+<div style="
+background:rgba(255,255,255,.10);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:60px;">
+
+🏆
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Skill Development
+
+</h3>
+
+<p style="line-height:30px;">
+
+Improve technical knowledge,
+leadership and environmental
+awareness.
+
+</p>
+
+</div>
+
+<div style="
+background:rgba(255,255,255,.10);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:60px;">
+
+🌍
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Future Leaders
+
+</h3>
+
+<p style="line-height:30px;">
+
+Build responsible teams
+who contribute towards
+a sustainable future.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="stats"
+style="padding:120px 8%;background:#ffffff;">
+
+<h2 style="
+text-align:center;
+font-size:52px;
+color:#0f172a;
+margin-bottom:70px;">
+
+Training Impact
+
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:30px;">
+
+<div style="
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.2);">
+
+<h1 style="font-size:60px;">50+</h1>
+
+<p style="font-size:22px;">
+
+Training Batches
+
+</p>
+
+</div>
+
+<div style="
+background:linear-gradient(135deg,#06b6d4,#0891b2);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;">
+
+<h1 style="font-size:60px;">1,500+</h1>
+
+<p style="font-size:22px;">
+
+Trainees
+
+</p>
+
+</div>
+
+<div style="
+background:linear-gradient(135deg,#22c55e,#16a34a);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;">
+
+<h1 style="font-size:60px;">98%</h1>
+
+<p style="font-size:22px;">
+
+Completion Rate
+
+</p>
+
+</div>
+
+<div style="
+background:linear-gradient(135deg,#f97316,#ea580c);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;">
+
+<h1 style="font-size:60px;">100%</h1>
+
+<p style="font-size:22px;">
+
+Certified Teams
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section
+style="
+padding:120px 8%;
+background:#eff6ff;">
+
+<h2 style="
+text-align:center;
+font-size:48px;
+color:#0f172a;
+margin-bottom:60px;">
+
+Learning Together, Growing Together
+
+</h2>
+
+<img
+
+src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80"
+
+style="
+width:100%;
+border-radius:30px;
+box-shadow:0 25px 60px rgba(0,0,0,.25);">
+
+</section>
+
+
+<section
+style="
+padding:120px 10%;
+background:#0f172a;
+color:white;
+text-align:center;">
+
+<h1
+style="
+font-size:50px;
+line-height:75px;">
+
+"Knowledge Builds Better Teams,
+Better Teams Build
+A Better Planet."
+
+</h1>
+
+<p
+style="
+margin-top:30px;
+font-size:22px;
+line-height:40px;
+color:#d1d5db;">
+
+Every trained team member contributes to
+a cleaner environment through knowledge,
+discipline and sustainable practices.
+
+</p>
+
+</section>
+
+
+
+<section id="contact"
+
+style="
+padding:120px 8%;
+background:linear-gradient(135deg,#2563eb,#38bdf8);
+text-align:center;
+color:white;">
+
+<h1 style="font-size:60px;">
+
+Ready To Manage Batches?
+
+</h1>
+
+<p
+style="
+font-size:22px;
+max-width:850px;
+margin:30px auto;
+line-height:40px;">
+
+Create training batches,
+assign members,
+monitor progress,
+and build high-performing recycling teams.
+
+</p>
+
+<div style="margin-top:50px;">
+
+<button
+
+onclick="window.location.href='batches.html'"
+
+style="
+padding:18px 45px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:white;
+color:#2563eb;
+font-weight:bold;
+cursor:pointer;
+margin:15px;">
+
+👥 Launch Batch Manager
+
+</button>
+
+<button
+
+onclick="window.location.href='dashboard.html'"
+
+style="
+padding:18px 45px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:#111;
+color:white;
+cursor:pointer;
+margin:15px;">
+
+⬅ Back To Dashboard
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<footer
+style="
+background:#111;
+padding:40px;
+text-align:center;
+color:white;">
+
+<h2>♻ RecycleX</h2>
+
+<p style="margin-top:15px;color:#bbb;">
+
+Training Today. Greener Tomorrow.
+
+</p>
+
+<p style="margin-top:20px;color:#888;font-size:14px;">
+
+© 2026 RecycleX | Smart Batch Management
+
+</p>
+
+</footer>
+
+</body>
+</html>
