@@ -1,0 +1,784 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RecycleX | Smart Collections</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+overflow-x:hidden;
+background:#fff;
+}
+
+
+
+nav{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:22px 70px;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(0,0,0,.35);
+backdrop-filter:blur(15px);
+
+z-index:999;
+
+}
+
+.logo{
+
+font-size:33px;
+font-weight:700;
+color:white;
+
+}
+
+.logo span{
+
+color:#66ff66;
+
+}
+
+nav ul{
+
+display:flex;
+gap:35px;
+list-style:none;
+
+}
+
+nav ul li a{
+
+text-decoration:none;
+color:white;
+font-size:17px;
+transition:.4s;
+
+}
+
+nav ul li a:hover{
+
+color:#66ff66;
+
+}
+
+
+
+.hero{
+
+height:100vh;
+
+background:
+
+linear-gradient(rgba(0,0,0,.55),
+rgba(0,0,0,.55)),
+
+url("https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1600&q=80");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:40px;
+
+}
+
+.hero-content{
+
+max-width:900px;
+color:white;
+animation:fade 1.5s;
+
+}
+
+.hero-content h1{
+
+font-size:70px;
+font-weight:800;
+line-height:90px;
+margin-bottom:25px;
+
+}
+
+.hero-content h1 span{
+
+color:#66ff66;
+
+}
+
+.hero-content p{
+
+font-size:22px;
+line-height:40px;
+margin-bottom:40px;
+
+}
+
+.quote{
+
+font-size:28px;
+font-style:italic;
+color:#ffe066;
+margin-bottom:35px;
+
+}
+
+.hero button{
+
+padding:18px 42px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+font-size:18px;
+margin:10px;
+transition:.4s;
+
+}
+
+.explore{
+
+background:#66ff66;
+font-weight:bold;
+
+}
+
+.dashboard{
+
+background:white;
+
+}
+
+.hero button:hover{
+
+transform:translateY(-8px);
+
+}
+
+.scroll{
+
+position:absolute;
+bottom:30px;
+left:50%;
+transform:translateX(-50%);
+color:white;
+animation:updown 2s infinite;
+
+}
+
+@keyframes updown{
+
+0%{transform:translate(-50%,0);}
+50%{transform:translate(-50%,15px);}
+100%{transform:translate(-50%,0);}
+
+}
+
+@keyframes fade{
+
+from{
+opacity:0;
+transform:translateY(60px);
+}
+
+to{
+opacity:1;
+transform:translateY(0);
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+♻ <span>RecycleX</span>
+
+</div>
+
+<ul>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#services">Services</a></li>
+
+<li><a href="#stats">Statistics</a></li>
+
+<li><a href="#contact">Contact</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Every <span>Collection</span>
+
+Creates A Cleaner Tomorrow
+
+</h1>
+
+<p>
+
+Connecting communities with intelligent waste collection
+to build a sustainable and greener future.
+
+</p>
+
+<div class="quote">
+
+"Small Collections. Massive Environmental Impact."
+
+</div>
+
+<button class="explore">
+
+Explore Collections
+
+</button>
+
+<button class="dashboard"
+
+onclick="window.location.href='dashboard.html'">
+
+Back To Dashboard
+
+</button>
+
+</div>
+
+<div class="scroll">
+
+⬇ Scroll To Discover
+
+</div>
+
+</section>
+
+
+<section id="about"
+style="padding:110px 8%;background:#f7fff8;">
+
+<div style="display:flex;
+flex-wrap:wrap;
+justify-content:space-between;
+align-items:center;
+gap:60px;">
+
+<div style="flex:1;min-width:350px;">
+
+<img
+
+src="https://images.unsplash.com/photo-1528323273322-d81458248d40?auto=format&fit=crop&w=900&q=80"
+
+style="width:100%;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.2);">
+
+</div>
+
+<div style="flex:1;min-width:350px;">
+
+<h5 style="color:#00c853;
+letter-spacing:2px;">
+
+SMART COLLECTION NETWORK
+
+</h5>
+
+<h2 style="font-size:55px;
+margin:20px 0;
+color:#184d47;">
+
+Efficient Collection.
+Cleaner Communities.
+
+</h2>
+
+<p style="font-size:20px;
+line-height:38px;
+color:#666;">
+
+RecycleX Collection Management
+ensures recyclable waste is
+collected efficiently through
+smart scheduling, intelligent
+tracking and optimized logistics.
+
+Every collection contributes
+towards a cleaner tomorrow.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+
+
+<section id="services"
+
+style="
+padding:120px 8%;
+background:linear-gradient(135deg,#134E5E,#71B280);
+">
+
+<h2 style="
+text-align:center;
+font-size:50px;
+color:white;
+margin-bottom:80px;">
+
+Smart Collection Services
+
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:35px;">
+
+<div style="
+background:rgba(255,255,255,.12);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:55px;color:#90EE90;">
+
+🚛
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Pickup Scheduling
+
+</h3>
+
+<p style="line-height:30px;">
+
+Schedule waste pickups
+efficiently across all
+registered locations.
+
+</p>
+
+</div>
+
+<div style="
+background:rgba(255,255,255,.12);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:55px;color:#90EE90;">
+
+📍
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Location Tracking
+
+</h3>
+
+<p style="line-height:30px;">
+
+Track every waste collection
+using intelligent location
+services.
+
+</p>
+
+</div>
+
+<div style="
+background:rgba(255,255,255,.12);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:55px;color:#90EE90;">
+
+♻
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Waste Collection
+
+</h3>
+
+<p style="line-height:30px;">
+
+Manage recyclable waste
+efficiently through
+smart operations.
+
+</p>
+
+</div>
+
+<div style="
+background:rgba(255,255,255,.12);
+padding:35px;
+border-radius:25px;
+backdrop-filter:blur(12px);
+color:white;">
+
+<div style="font-size:55px;color:#90EE90;">
+
+🌍
+
+</div>
+
+<h3 style="margin:25px 0;">
+
+Green Future
+
+</h3>
+
+<p style="line-height:30px;">
+
+Creating sustainable
+communities through
+responsible waste collection.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="stats"
+style="
+padding:120px 8%;
+background:#ffffff;">
+
+<h2 style="
+text-align:center;
+font-size:52px;
+color:#14532d;
+margin-bottom:70px;">
+
+Our Collection Impact
+
+</h2>
+
+<div style="
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+gap:30px;">
+
+<div style="
+background:linear-gradient(135deg,#16a34a,#22c55e);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.18);">
+
+<h1 style="font-size:60px;">250+</h1>
+
+<p style="font-size:22px;">
+
+Collection Points
+
+</p>
+
+</div>
+
+<div style="
+background:linear-gradient(135deg,#0ea5e9,#0284c7);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.18);">
+
+<h1 style="font-size:60px;">15K+</h1>
+
+<p style="font-size:22px;">
+
+Collections Completed
+
+</p>
+
+</div>
+
+<div style="
+background:linear-gradient(135deg,#f59e0b,#d97706);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.18);">
+
+<h1 style="font-size:60px;">120T</h1>
+
+<p style="font-size:22px;">
+
+Waste Collected
+
+</p>
+
+</div>
+
+<div style="
+background:linear-gradient(135deg,#7c3aed,#6d28d9);
+padding:45px;
+border-radius:25px;
+color:white;
+text-align:center;
+box-shadow:0 20px 40px rgba(0,0,0,.18);">
+
+<h1 style="font-size:60px;">98%</h1>
+
+<p style="font-size:22px;">
+
+Successful Pickups
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section
+style="
+padding:110px 8%;
+background:#eefcf2;">
+
+<h2 style="
+text-align:center;
+font-size:48px;
+margin-bottom:60px;
+color:#14532d;">
+
+Collection In Action
+
+</h2>
+
+<img
+
+src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=1600&q=80"
+
+style="
+width:100%;
+border-radius:30px;
+box-shadow:0 25px 60px rgba(0,0,0,.25);">
+
+</section>
+
+
+
+
+
+<section
+
+style="
+padding:120px 10%;
+background:#14532d;
+color:white;
+text-align:center;">
+
+<h1
+style="
+font-size:52px;
+line-height:75px;">
+
+"Every Collection Is A Promise
+To Protect Our Planet."
+
+</h1>
+
+<p
+style="
+margin-top:30px;
+font-size:22px;
+line-height:40px;
+color:#d9d9d9;">
+
+Together, every pickup, every collection,
+and every recycled item helps build
+a cleaner and healthier world.
+
+</p>
+
+</section>
+
+
+
+
+<section
+id="contact"
+
+style="
+padding:120px 8%;
+background:linear-gradient(135deg,#16a34a,#4ade80);
+text-align:center;
+color:white;">
+
+<h1
+style="
+font-size:60px;">
+
+Ready To Manage Collections?
+
+</h1>
+
+<p
+style="
+font-size:22px;
+max-width:850px;
+margin:30px auto;
+line-height:40px;">
+
+Monitor pickup requests,
+track recyclable waste,
+manage collection records
+and improve operational efficiency.
+
+</p>
+
+<div style="margin-top:50px;">
+
+<button
+
+onclick="window.location.href='collections.html'"
+
+style="
+padding:18px 45px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:white;
+color:#16a34a;
+font-weight:bold;
+cursor:pointer;
+margin:15px;">
+
+🚛 Launch Collection Manager
+
+</button>
+
+<button
+
+onclick="window.location.href='dashboard.html'"
+
+style="
+padding:18px 45px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:#111;
+color:white;
+cursor:pointer;
+margin:15px;">
+
+⬅ Back To Dashboard
+
+</button>
+
+</div>
+
+</section>
+
+
+
+
+
+<footer
+style="
+background:#111;
+padding:40px;
+text-align:center;
+color:white;">
+
+<h2>
+
+♻ RecycleX
+
+</h2>
+
+<p
+style="
+margin-top:15px;
+color:#bbb;">
+
+Smart Collection.
+Smarter Planet.
+
+</p>
+
+<p
+style="
+margin-top:20px;
+color:#888;
+font-size:14px;">
+
+© 2026 RecycleX | Smart Collection Network
+
+</p>
+
+</footer>
+
+</body>
+</html>
