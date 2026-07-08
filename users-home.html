@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>RecycleX | Users Management</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+
+background:#f5f7fa;
+overflow-x:hidden;
+
+}
+
+
+nav{
+
+position:fixed;
+top:0;
+left:0;
+width:100%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:rgba(0,0,0,.45);
+backdrop-filter:blur(12px);
+z-index:1000;
+
+}
+
+.logo{
+
+font-size:30px;
+font-weight:bold;
+color:white;
+
+}
+
+nav ul{
+
+display:flex;
+gap:35px;
+list-style:none;
+
+}
+
+nav ul li a{
+
+color:white;
+text-decoration:none;
+font-size:18px;
+transition:.4s;
+
+}
+
+nav ul li a:hover{
+
+color:#00ff9d;
+
+}
+
+
+
+.hero{
+
+height:100vh;
+
+background:
+
+linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+
+url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=80");
+
+background-size:cover;
+background-position:center;
+
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:30px;
+
+}
+
+.hero-content{
+
+max-width:850px;
+color:white;
+
+animation:fade 2s;
+
+}
+
+.hero-content h1{
+
+font-size:65px;
+margin-bottom:25px;
+
+}
+
+.hero-content span{
+
+color:#00ffae;
+
+}
+
+.hero-content p{
+
+font-size:22px;
+line-height:40px;
+margin-bottom:40px;
+
+}
+
+.quote{
+
+font-size:28px;
+font-style:italic;
+color:#ffd54f;
+margin-bottom:35px;
+
+}
+
+.hero button{
+
+padding:18px 45px;
+border:none;
+border-radius:50px;
+font-size:18px;
+cursor:pointer;
+margin:10px;
+transition:.4s;
+
+}
+
+.explore{
+
+background:#00c853;
+color:white;
+
+}
+
+.explore:hover{
+
+transform:translateY(-8px);
+background:#009624;
+
+}
+
+.dashboard{
+
+background:white;
+color:#222;
+
+}
+
+.dashboard:hover{
+
+transform:translateY(-8px);
+
+}
+
+
+.scroll{
+
+position:absolute;
+bottom:25px;
+left:50%;
+transform:translateX(-50%);
+color:white;
+font-size:18px;
+animation:move 2s infinite;
+
+}
+
+@keyframes move{
+
+0%{
+
+transform:translate(-50%,0);
+
+}
+
+50%{
+
+transform:translate(-50%,15px);
+
+}
+
+100%{
+
+transform:translate(-50%,0);
+
+}
+
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(80px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+♻ RecycleX
+
+</div>
+
+<ul>
+
+<li><a href="#about">About</a></li>
+
+<li><a href="#features">Features</a></li>
+
+<li><a href="#stats">Statistics</a></li>
+
+<li><a href="#contact">Start</a></li>
+
+</ul>
+
+</nav>
+
+<section class="hero">
+
+<div class="hero-content">
+
+<h1>
+
+Users <span>Management</span>
+
+</h1>
+
+<p>
+
+Manage every registered user in the RecycleX ecosystem with a secure, smart and sustainable management system.
+
+</p>
+
+<div class="quote">
+
+"Every User Counts. Every Action Matters."
+
+</div>
+
+<button class="explore" onclick="location.href='#about'">
+
+Explore More
+
+</button>
+
+<button class="dashboard" onclick="window.location.href='dashboard.html'">
+
+⬅ Back To Dashboard
+
+</button>
+
+</div>
+
+<div class="scroll">
+
+⬇ Scroll Down
+
+</div>
+
+</section>
+
+
+<section id="about" style="padding:100px 8%;background:white;">
+
+<h2 style="text-align:center;font-size:45px;color:#0d6e6e;margin-bottom:20px;">
+
+Why User Management?
+
+</h2>
+
+<p style="text-align:center;font-size:20px;color:#666;max-width:900px;margin:auto;line-height:35px;">
+
+Managing users efficiently is the heart of every successful recycling platform.
+Every registered user contributes towards a cleaner environment, earns rewards,
+and helps RecycleX build a sustainable future.
+
+</p>
+
+<div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:60px;">
+
+<img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=700&q=80"
+style="width:420px;border-radius:20px;box-shadow:0 15px 30px rgba(0,0,0,.25);">
+
+<div style="max-width:500px;">
+
+<h3 style="font-size:34px;color:#222;margin-bottom:20px;">
+
+"Together We Can Build A Greener Tomorrow"
+
+</h3>
+
+<p style="font-size:18px;color:#666;line-height:35px;">
+
+The Users Module helps administrators manage every registered citizen,
+track their recycling activities, monitor reward points,
+and encourage sustainable living.
+
+Every profile represents another person committed to protecting our planet.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<section id="features"
+style="padding:100px 8%;background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);">
+
+<h2 style="text-align:center;color:white;font-size:45px;margin-bottom:70px;">
+
+Our Features
+
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px;">
+
+<div style="background:white;border-radius:20px;padding:35px;text-align:center;transition:.4s;">
+
+<div style="font-size:60px;">👤</div>
+
+<h3 style="margin:20px 0;">User Profiles</h3>
+
+<p>
+
+Maintain every user's information securely and efficiently.
+
+</p>
+
+</div>
+
+<div style="background:white;border-radius:20px;padding:35px;text-align:center;">
+
+<div style="font-size:60px;">🎁</div>
+
+<h3 style="margin:20px 0;">Reward System</h3>
+
+<p>
+
+Encourage recycling habits through reward points.
+
+</p>
+
+</div>
+
+<div style="background:white;border-radius:20px;padding:35px;text-align:center;">
+
+<div style="font-size:60px;">📊</div>
+
+<h3 style="margin:20px 0;">Activity Tracking</h3>
+
+<p>
+
+Track every user's recycling contribution easily.
+
+</p>
+
+</div>
+
+<div style="background:white;border-radius:20px;padding:35px;text-align:center;">
+
+<div style="font-size:60px;">🌍</div>
+
+<h3 style="margin:20px 0;">Green Mission</h3>
+
+<p>
+
+Creating a cleaner and smarter world together.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="stats" style="padding:100px 8%;background:#ffffff;">
+
+<h2 style="text-align:center;font-size:45px;color:#0d6e6e;margin-bottom:60px;">
+Platform Statistics
+</h2>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;">
+
+<div style="background:#0d6e6e;color:white;padding:40px;border-radius:20px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,.2);">
+<h1 style="font-size:55px;">500+</h1>
+<p style="font-size:20px;">Registered Users</p>
+</div>
+
+<div style="background:#198754;color:white;padding:40px;border-radius:20px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,.2);">
+<h1 style="font-size:55px;">25K+</h1>
+<p style="font-size:20px;">Reward Points</p>
+</div>
+
+<div style="background:#0dcaf0;color:white;padding:40px;border-radius:20px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,.2);">
+<h1 style="font-size:55px;">1200kg</h1>
+<p style="font-size:20px;">Waste Recycled</p>
+</div>
+
+<div style="background:#fd7e14;color:white;padding:40px;border-radius:20px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,.2);">
+<h1 style="font-size:55px;">100%</h1>
+<p style="font-size:20px;">Green Commitment</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<section style="padding:90px 8%;background:#f4f9f9;text-align:center;">
+
+<h1 style="font-size:40px;color:#0d6e6e;margin-bottom:25px;">
+"In Every User Lives The Power To Change The World."
+</h1>
+
+<p style="font-size:20px;color:#555;max-width:900px;margin:auto;line-height:35px;">
+Every registration is more than just an account.
+It represents a person willing to contribute towards a cleaner environment,
+earn rewards, and inspire others to recycle responsibly.
+</p>
+
+</section>
+
+
+
+<section id="contact"
+style="padding:120px 8%;
+background:linear-gradient(135deg,#11998e,#38ef7d);
+text-align:center;
+color:white;">
+
+<h1 style="font-size:55px;margin-bottom:20px;">
+Ready To Manage Users?
+</h1>
+
+<p style="font-size:22px;max-width:850px;margin:auto;line-height:40px;">
+Create new users, update information,
+view user details, manage recycling rewards,
+and perform complete CRUD operations with ease.
+</p>
+
+<div style="margin-top:50px;">
+
+<button onclick="window.location.href='users.html'"
+style="padding:18px 45px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:white;
+color:#11998e;
+cursor:pointer;
+margin:15px;
+font-weight:bold;">
+
+🚀 CRUD OPERATIONS
+
+</button>
+
+<button onclick="window.location.href='dashboard.html'"
+style="padding:18px 45px;
+font-size:20px;
+border:none;
+border-radius:50px;
+background:#222;
+color:white;
+cursor:pointer;
+margin:15px;">
+
+⬅ BACK TO DASHBOARD
+
+</button>
+
+</div>
+
+</section>
+
+
+
+
+<footer style="background:#111;color:white;text-align:center;padding:30px;">
+
+<h2>♻ RecycleX</h2>
+
+<p style="margin-top:10px;">
+Building a Sustainable Future Through Smart Recycling
+</p>
+
+<p style="margin-top:15px;font-size:14px;color:#bbb;">
+© 2026 RecycleX. All Rights Reserved.
+</p>
+
+</footer>
+
+</body>
+</html>
